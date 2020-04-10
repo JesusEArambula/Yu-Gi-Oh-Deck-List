@@ -6,16 +6,16 @@ body {
 }
 
 .list-view {
-    text-align: center;
-    display: flex inline-block;
-    columns: 4;
-    width: 90%;
+    width: 1500px;
+    margin: auto;
+    margin-top: 5%;
+    margin-left: 11%;
 }
 
 
 .card {
     box-shadow: 0 4px 8px 0 black;
-    transition: 0.5s ease;
+    transition: 0.4s ease;
     cursor: pointer;
     width: 300px;
     text-align: center;
@@ -25,7 +25,7 @@ body {
     margin: 2.6%;
     border-radius: 18px;
     color: black;
-    background-color: navy;
+    background: navy;
 }
 
 .card:hover {

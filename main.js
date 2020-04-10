@@ -34,7 +34,7 @@ var getAllRecords = function() {
 var listView = function(id, picture, deckName, strategy) {
     return `
       <div class="card border-dark">
-        ${picture ? `<img src="${picture[0].url}" class="card-img-top" style="background-color: navy">` : ``}
+        ${picture ? `<img src="${picture[0].url}" class="card-img-top">` : ``}
         
         <div class="name">
           <h5>${deckName}</h5>
