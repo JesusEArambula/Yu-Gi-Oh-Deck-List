@@ -1,0 +1,39 @@
+body {
+    background-image: url('266471.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;  
+    background-size: cover;
+}
+
+.list-view {
+    text-align: center;
+    display: flex inline-block;
+    columns: 4;
+    width: 90%;
+}
+
+
+.card {
+    box-shadow: 0 4px 8px 0 black;
+    transition: 0.5s ease;
+    cursor: pointer;
+    width: 300px;
+    text-align: center;
+    font-size: 16px;
+    font-family: sans-serif;
+    float: left;
+    margin: 2.6%;
+    border-radius: 18px;
+    color: black;
+    background-color: navy;
+}
+
+.card:hover {
+    box-shadow: 5px 5px 15px 0 black;
+    transform: scale(1.1);
+}
+
+.name {
+    margin-top: 10px;
+    padding: 2px 16px;
+}
