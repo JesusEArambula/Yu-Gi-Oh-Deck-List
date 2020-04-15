@@ -33,14 +33,19 @@ var getAllRecords = function() {
 
 var listView = function(id, picture, deckName, strategy) {
     return `
-      <div class="card border-dark">
-        ${picture ? `<img src="${picture[0].url}" class="card-img-top">` : ``}
-        
-        <div class="name">
-          <h5>${deckName}</h5>
+
+    <div class="col-sm-3">
+      <div class="card border-dark" style="width: 18rem; background-color: navy; color: white;">
+        ${picture ? `<img src="${picture[0].url}" class="card-img-top" style="height-auto">` : ``}
+      
+        <div class="card-body">
+          <div class="name">
+            <h5>${deckName}</h5>
+          </div>
         </div>
+
       </div>
-  
+    </div>
 
     `;
   };
