@@ -9,6 +9,10 @@ function getParameterByName(name, url)
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
+function formattedString(value) {
+  return value.split(";").join("<li>");
+}
+
 var getAllRecords = function() {
     $.getJSON(
       "https://api.airtable.com/v0/appTp6UQvc8Q7F18e/Decks?api_key=keyorwAJW52Aa0nI4",
@@ -30,33 +34,113 @@ var getAllRecords = function() {
     );
   };
 
-
-var listView = function(id, picture, deckName, strategy) {
+  var listView = function(id, picture, deckName, strategy) {
     return `
+    <div class="do-hover col-md-4">
+      <div class="card mb-4" style="background: navy">
 
-    <div class="col-sm-3">
-      <div class="card border-dark" style="width: 18rem; background-color: navy; color: white;">
-        ${picture ? `<img src="${picture[0].url}" class="card-img-top" style="height-auto">` : ``}
-      
-        <div class="card-body">
-          <div class="name">
-            <h5>${deckName}</h5>
+        <a href="index.html?id=${id}" style="text-decoration: none">
+          <div class="card-image">
+            ${picture ? `<img src="${picture[0].url}" class="card-img-top" style="height-auto; border-radius: 18px;">` : ``}
           </div>
-        </div>
 
+          <div class="card-text">
+            <h5 style="color: white">${deckName}</h5>
+          </div>
+        </a>
       </div>
     </div>
-
     `;
   };
 
+var getOneRecord = function(id) {  
+  $.getJSON(
+    `https://api.airtable.com/v0/appTp6UQvc8Q7F18e/Decks/${id}?api_key=keyorwAJW52Aa0nI4`,
+    function(record) {
+      var html = [];
+      var picture = record.fields["Picture"];
+      var deckName = record.fields["Deck Name"];
+      var strategy = record.fields["Strategy"];
+      var mainDeck = record.fields["Main Deck"];
+      var extraDeck = record.fields["Extra Deck"];
+      var learningCurve = record.fields["Learning Curve"];
+      var priceRange = record.fields["Price Range"];
+      html.push(
+        detailView(
+          picture,
+          deckName,
+          strategy,
+          mainDeck,
+          extraDeck,
+          learningCurve,
+          priceRange
+        )
+      );
+      $(".detail-view").append(html);
+    }
+  );
+};
+
+
+var detailView = function(
+  picture,
+  deckName,
+  strategy,
+  mainDeck,
+  extraDeck,
+  learningCurve,
+  priceRange
+) {
+  return `
+
+  <div class="no-hover col-md-4">
+    <div class="card mb-4">
+    ${picture ? `<img src="${picture[0].url}" class="card-img-top" style="height-auto; border-radius: 18px;">` : ``}
+      <div class="card-body">
+        <h2 class="card-title">${deckName}</h2>
+        <p class="card-text" style="text-align: center; font-size: 20px;">
+          <br>
+          <strong> Strategy: </strong> <br>
+          ${strategy} <br> <br>
+          <strong> Learning Curve: </strong> <br>
+          ${learningCurve} <br> <br>
+          <em> [ 1: Easy <br> 10: Difficult ] </em> <br> <br>
+          <strong> Price Range: </strong> <br> 
+          $${priceRange}
+          <br> <br>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="no-hover col-md-4">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h2 class="card-title"> Main Deck </h2>
+        <p class="card-text">
+          ${formattedString(mainDeck)}<br>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="no-hover col-md-4">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h2 class="card-title"> Extra Deck </h2>
+        <p class="card-text">
+          ${formattedString(extraDeck)}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  `;
+};
+
 
 var id = getParameterByName("id");
-if (id)
-{
+if (id) {
   getOneRecord(id);
 } 
-else
-{
+else {
   getAllRecords();
 }

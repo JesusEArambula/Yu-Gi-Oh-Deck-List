@@ -22,28 +22,45 @@
           <ul class="navbar-nav">
             <!--  -->
             <li class="nav-item active">
-              <a class="nav-link" href="#">Deck List<span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="index.html">Deck List<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Card List</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Duel Links</a>
+              <a class="nav-link" href="#" target="_blank">Duel Links</a>
             </li>
           </ul>
         </div>
-        <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-secondary" type="submit">Search</button>
-          </form>
       </nav>
     <!-- ================================================================================================================ -->
 
-      <div class="list-view">
+    <div class="container">
+      <div id="myUL" class="list-view row">
         
       </div>
 
+      <div class="detail-view row">
 
+      </div>
+    </div>
+
+
+    <script>
+      function myFunction() {
+          var input, filter, ul, li, a, i, txtValue;
+          input = document.getElementById("myInput");
+          filter = input.value.toUpperCase();
+          ul = document.getElementById("myUL");
+          li = ul.getElementsByTagName("li");
+          for (i = 0; i < li.length; i++) {
+              a = li[i].getElementsByTagName("a")[0];
+              txtValue = a.textContent || a.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                  li[i].style.display = "";
+              } else {
+                  li[i].style.display = "none";
+              }
+          }
+      }
+    </script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
