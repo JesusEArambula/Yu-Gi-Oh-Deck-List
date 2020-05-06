@@ -9,6 +9,8 @@ function getParameterByName(name, url)
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
+
+
 function formattedString(value) {
   return value.split(";").join("<li>");
 }
@@ -34,9 +36,10 @@ var getAllRecords = function() {
     );
   };
 
+
   var listView = function(id, picture, deckName, strategy) {
     return `
-    <div class="do-hover col-md-4">
+    <div class="do-hover col-md-4 cardImageText">
       <div class="card mb-4" style="background: navy">
 
         <a href="index.html?id=${id}" style="text-decoration: none">
@@ -45,13 +48,30 @@ var getAllRecords = function() {
           </div>
 
           <div class="card-text">
-            <h5 style="color: white">${deckName}</h5>
+            <h5 class="card-key" style="color: white">${deckName}</h5>
           </div>
         </a>
       </div>
     </div>
     `;
   };
+
+function searchFunction() {
+  var input, filter, cardimagetext, i, x;
+  input = document.getElementById('myinput');
+  filter = input.value.toUpperCase();
+  cardimagetext = document.getElementsByClassName('cardImageText');
+
+  for (x = 0; x < cardimagetext.length; x++) {
+    i = cardimagetext[x].getElementsByClassName('card-key')[0];
+    if (i.innerHTML.toUpperCase().indexOf(filter) > -1) {
+      cardimagetext[x].style.display = '';
+    }
+    else {
+      cardimagetext[x].style.display = 'none';
+    }
+  }
+}
 
 var getOneRecord = function(id) {  
   $.getJSON(
